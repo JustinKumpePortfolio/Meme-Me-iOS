@@ -1,6 +1,6 @@
 //
 //  MemeTextDelegate.swift
-//  Sandbox
+//  Meme Me
 //
 //  Created by Justin Kumpe on 6/19/20.
 //  Copyright © 2020 Justin Kumpe. All rights reserved.

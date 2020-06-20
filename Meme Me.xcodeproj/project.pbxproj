@@ -13,6 +13,7 @@
 		0FDC1440249D9DBF005F7DDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC143E249D9DBF005F7DDF /* Main.storyboard */; };
 		0FDC1442249D9DC0005F7DDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC1441249D9DC0005F7DDF /* Assets.xcassets */; };
 		0FDC1445249D9DC0005F7DDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC1443249D9DC0005F7DDF /* LaunchScreen.storyboard */; };
+		0FDC144D249DA042005F7DDF /* MemeTextDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC144C249DA042005F7DDF /* MemeTextDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0FDC1441249D9DC0005F7DDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0FDC1444249D9DC0005F7DDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FDC1446249D9DC0005F7DDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FDC144C249DA042005F7DDF /* MemeTextDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTextDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				0FDC143C249D9DBF005F7DDF /* ViewController.swift */,
 				0FDC143E249D9DBF005F7DDF /* Main.storyboard */,
 				0FDC1441249D9DC0005F7DDF /* Assets.xcassets */,
+				0FDC144C249DA042005F7DDF /* MemeTextDelegate.swift */,
 				0FDC1443249D9DC0005F7DDF /* LaunchScreen.storyboard */,
 				0FDC1446249D9DC0005F7DDF /* Info.plist */,
 			);
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FDC143D249D9DBF005F7DDF /* ViewController.swift in Sources */,
+				0FDC144D249DA042005F7DDF /* MemeTextDelegate.swift in Sources */,
 				0FDC1439249D9DBF005F7DDF /* AppDelegate.swift in Sources */,
 				0FDC143B249D9DBF005F7DDF /* SceneDelegate.swift in Sources */,
 			);
@@ -287,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				INFOPLIST_FILE = "Meme Me/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2T42Z3DM34;
 				INFOPLIST_FILE = "Meme Me/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
