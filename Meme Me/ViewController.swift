@@ -96,6 +96,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imagePickerView.image = image
             initButtons(enableShare: true)
+            resizeImageView()
         }
         
     }
@@ -151,7 +152,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
 //    MARK: Generate Memed Image
     func generateMemedImage() -> UIImage {
-
+        
         // Hide toolbar and navbar
         self.initView(clearValues: false, hideToolbars: true)
         
@@ -205,5 +206,41 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         buttonCamera.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         buttonSend.isEnabled = enableShare
     }
+    
+//    MARK: viewWillTransition
+//    Resizes image view when transitioning to/from Landscape/Portrait
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil, completion: {
+            _ in
+
+            self.resizeImageView()
+        })
+    }
+    
+//    MARK: Resize Image View
+//    Resizes image view to place text fields on image.
+    func resizeImageView(){
+        if let image = imagePickerView.image{
+        
+            let ratio = image.size.width / image.size.height
+            var newWidth = view.frame.width
+            var newHeight = view.frame.width / ratio
+            if UIDevice.current.orientation.isLandscape{
+                newWidth = view.frame.height / ratio
+                newHeight = view.frame.height
+            }
+            let constraints = [
+                imagePickerView.heightAnchor.constraint(equalToConstant: newHeight),
+                imagePickerView.widthAnchor.constraint(equalToConstant: newWidth)
+            ]
+            NSLayoutConstraint.activate(constraints)
+            view.layoutIfNeeded()
+            imagePickerView.contentMode = .scaleAspectFit
+        }
+    }
+    
+    
+    
 }
 
