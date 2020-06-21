@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeEditorViewController.swift
 //  Meme Me
 //
 //  Created by Justin Kumpe on 6/18/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
     
 //    MARK: UIButtons
@@ -35,13 +35,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fieldTop.delegate = MemeTextFieldDelegate
-        self.fieldBottom.delegate = MemeTextFieldDelegate
-        self.fieldTop.defaultTextAttributes = MemeTextFieldDelegate.memeTextAttributes
-        self.fieldBottom.defaultTextAttributes = MemeTextFieldDelegate.memeTextAttributes
-        self.fieldTop.textAlignment = .center
-        self.fieldBottom.textAlignment = .center
-        self.initView(clearValues: true, hideToolbars: false)
+        initTextFields(fieldTop)
+        initTextFields(fieldBottom)
+        initView(clearValues: true, hideToolbars: false)
         initButtons(enableShare: false)
     }
     
@@ -58,20 +54,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
 //    MARK: Pressed Album Button
     @IBAction func pressedPickImage(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+        showImagePicker(.photoLibrary)
     }
     
 //    MARK: Pressed Camera Button
     @IBAction func pressedTakeImage(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+        showImagePicker(.camera)
     }
     
+//    MARK: Show Image Picker
+//    Loads image picker using supplied source type
+    func showImagePicker(_ source: UIImagePickerController.SourceType){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = source
+        present(imagePicker, animated: true, completion: nil)
+    }
     
 //    MARK: Cancel Pick
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -80,12 +78,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
 //    MARK: Pressed Send Button
     @IBAction func pressedSend(_ sender: Any) {
-        self.share()
+        share()
     }
     
 //    MARK: Pressed Cancel Button
     @IBAction func pressedCancel(_ sender: Any) {
-        self.initView(clearValues: true, hideToolbars: false)
+        initView(clearValues: true, hideToolbars: false)
     }
     
     
@@ -142,19 +140,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
-//    MARK: Meme Struct
-    struct Meme{
-        var topText: String
-        var bottomText: String
-        var originalImage: UIImage
-        var memedImage: UIImage
-    }
-    
 //    MARK: Generate Memed Image
     func generateMemedImage() -> UIImage {
         
         // Hide toolbar and navbar
-        self.initView(clearValues: false, hideToolbars: true)
+        initView(clearValues: false, hideToolbars: true)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -163,7 +153,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
 
         // Show toolbar and navbar
-        self.initView(clearValues: false, hideToolbars: false)
+        initView(clearValues: false, hideToolbars: false)
 
         return memedImage
     }
@@ -181,7 +171,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let image = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         controller.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) -> () in
-            if (completed) {
+            if completed {
                 self.save(memedImage: image)
                 
             }
@@ -192,13 +182,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 //    MARK: Initialize View
     func initView(clearValues: Bool, hideToolbars: Bool){
         if clearValues{
-            self.fieldTop.text = "TOP"
-            self.fieldBottom.text = "BOTTOM"
-            self.imagePickerView.image  = nil
+            fieldTop.text = "TOP"
+            fieldBottom.text = "BOTTOM"
+            imagePickerView.image  = nil
             initButtons(enableShare: false)
         }
-        self.toolbarBottom.isHidden = hideToolbars
-        self.toolbarTop.isHidden = hideToolbars
+        toolbarBottom.isHidden = hideToolbars
+        toolbarTop.isHidden = hideToolbars
     }
     
 //    MARK: Initialize Buttons
@@ -240,7 +230,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    
+    func initTextFields(_ textField: UITextField){
+        textField.delegate = MemeTextFieldDelegate
+        textField.defaultTextAttributes = MemeTextFieldDelegate.memeTextAttributes
+        textField.textAlignment = .center
+    }
     
 }
 

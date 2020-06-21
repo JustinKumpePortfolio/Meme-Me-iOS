@@ -21,7 +21,7 @@ class MemeTextDelegate: NSObject, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        return true;
+        return true
     }
     
     
