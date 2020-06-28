@@ -8,7 +8,7 @@ Meme Me App for Udacity iOS Nano-Degree Project
 
 | List View | Grid View |
 | ----------------- |  ----------------- |
-| ![ListView.PNG](screenshots/ListView.PNG) |  ![GridView.png](screenshots/GridView.png) |
+| ![ListView.png](screenshots/ListView.png) |  ![GridView.png](screenshots/GridView.png) |
 
 ## Frameworks Used
 UIKit
