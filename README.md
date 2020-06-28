@@ -15,7 +15,8 @@ UIKit
 
 ## Instructions
 
-1. Select image for meme by tapping camera (to take picture) or album (to select existing picture)
-2. Tap on TOP text to type text on top of image
-3. Tap on BOTTOM text to type text on bottom of image
-4. Click share icon in upper left to share or save the image
+1. Select Add icon in upper right
+2. Select image for meme by tapping camera (to take picture) or album (to select existing picture)
+3. Tap on TOP text to type text on top of image
+4. Tap on BOTTOM text to type text on bottom of image
+5. Click share icon in upper left to share or save the image
