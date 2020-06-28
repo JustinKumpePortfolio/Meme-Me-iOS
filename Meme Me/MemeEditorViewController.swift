@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
   
     
 //    MARK: UIButtons
@@ -84,6 +84,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 //    MARK: Pressed Cancel Button
     @IBAction func pressedCancel(_ sender: Any) {
         initView(clearValues: true, hideToolbars: false)
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -147,8 +148,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         initView(clearValues: false, hideToolbars: true)
         
         // Render view to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContext(self.view.bounds.size)
+        view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
@@ -162,8 +163,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     func save(memedImage: UIImage) {
         // Create the meme
         let meme = Meme(topText: fieldTop.text!, bottomText: fieldBottom.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
-        print(meme)
         initView(clearValues: true, hideToolbars: false)
+        
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
     }
     
 //    MARK: Share Meme
@@ -173,6 +179,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         controller.completionWithItemsHandler = { (activityType, completed, returnedItems, activityError) -> () in
             if completed {
                 self.save(memedImage: image)
+                self.dismiss(animated: true, completion: nil)
                 
             }
         }
@@ -197,8 +204,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         buttonSend.isEnabled = enableShare
     }
     
-//    MARK: viewWillTransition
-//    Resizes image view when transitioning to/from Landscape/Portrait
+/*    MARK: viewWillTransition
+      Resizes image view when transitioning to/from Landscape/Portrait
+ */
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil, completion: {
@@ -208,8 +216,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         })
     }
     
-//    MARK: Resize Image View
-//    Resizes image view to place text fields on image.
+/*    MARK: Resize Image View
+    Resizes image view to place text fields on image.
+ */
     func resizeImageView(){
         if let image = imagePickerView.image{
         
