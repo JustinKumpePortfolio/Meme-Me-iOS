@@ -11,7 +11,11 @@ import UIKit
 
 class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
-
+/*    MARK: Refresh Control
+     Adds functionality to swipe down to refresh table
+ */
+    private let refreshControl = UIRefreshControl()
+    
 //    MARK: Table View
     @IBOutlet var viewTable: UITableView!
     
@@ -24,6 +28,9 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewTable.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(self.refreshTable), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing Sent Memes")
         viewTable.reloadData()
     }
     
@@ -61,4 +68,19 @@ class SentMemesTableViewController: UIViewController, UITableViewDelegate, UITab
         performSegue(withIdentifier: "segueMemeEditor", sender: self)
     }
     
+//    MARK: Swipe to Delete Function
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let object = UIApplication.shared.delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+//    MARK: Refresh Table
+    @objc func refreshTable(){
+        viewTable.reloadData()
+        refreshControl.endRefreshing()
+    }
 }

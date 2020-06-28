@@ -11,6 +11,11 @@ import UIKit
 class SentMemesCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
 
 
+/*    MARK: Refresh Control
+     Adds functionality for swipe down to refresh collection view
+ */
+    private let refreshControl = UIRefreshControl()
+    
 //    MARK: Collection View
     @IBOutlet var viewCollection: UICollectionView!
     
@@ -41,6 +46,9 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDeleg
     
     
     override func viewDidAppear(_ animated: Bool) {
+        viewCollection.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(self.refreshTable), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing Sent Memes")
         viewCollection.reloadData()
     }
     
@@ -73,6 +81,10 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDeleg
     }
     
 
-    
+//    MARK: Refresh Table
+    @objc func refreshTable(){
+        viewCollection.reloadData()
+        refreshControl.endRefreshing()
+    }
     
 }
