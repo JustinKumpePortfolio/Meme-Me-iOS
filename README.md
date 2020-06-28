@@ -6,6 +6,10 @@ Meme Me App for Udacity iOS Nano-Degree Project
 | ----------------- |  ----------------- | ----------------- | ----------------- |
 | ![HomeScreen.PNG](screenshots/HomeScreen.PNG) |  ![ImagePicker.png](screenshots/ImagePicker.png) | ![CreateMeme.png](screenshots/CreateMeme.png) | ![ShareMeme.png](screenshots/ShareMeme.png) |
 
+| List View | Grid View |
+| ----------------- |  ----------------- |
+| ![ListView.PNG](screenshots/ListView.PNG) |  ![GridView.png](screenshots/GridView.png) |
+
 ## Frameworks Used
 UIKit
 
