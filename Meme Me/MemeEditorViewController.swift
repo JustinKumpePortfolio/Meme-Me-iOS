@@ -47,7 +47,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
@@ -150,14 +149,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.bounds.size)
         view.drawHierarchy(in: self.view.bounds, afterScreenUpdates: true)
-        let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        var memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
         // Show toolbar and navbar
         initView(clearValues: false, hideToolbars: false)
-
         return memedImage
     }
+    
+
     
 //    MARK: Save Memed Image
     func save(memedImage: UIImage) {
@@ -185,6 +185,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         present(controller,animated: true, completion: nil)
     }
+    
     
 //    MARK: Initialize View
     func initView(clearValues: Bool, hideToolbars: Bool){
