@@ -33,7 +33,7 @@ The Meme-Me app was created to specification for my final project in the UIKit F
 ### List View Screen:
 - View a list of Memes you have created
 - Tapping on the image from the list will show a larger version of the image
-- Swipe left on the image from list to delete from saved images
+- Swipe left on the image from list to delete from saved Memes
 
 ### Grid View Screen:
 - View a list of Memes you have created
