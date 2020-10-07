@@ -1,4 +1,4 @@
-# Meme-Me-iOS
+# Meme-Me-iOS <img src="https://img.shields.io/badge/platform-iOS-lightgrey"/> <img src="https://img.shields.io/badge/swift-5-green"/>
 The Meme-Me app was created from scratch to specification for my final project in the UIKit Fundamentals course as a part of my iOS Developer Nanodegree from Udacity. Meme-Me is an app that allows you to take a picture (or select one from your album) and add text to top and bottom of the image to create a Meme. Once you have created your Meme you can save it to your Album or send it to a friend.
 
 ## Screenshots
